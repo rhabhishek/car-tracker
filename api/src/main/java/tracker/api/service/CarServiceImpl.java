@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tracker.api.entity.Car;
-import tracker.api.entity.Reading;
+import tracker.api.exception.ResourceNotFoundException;
 import tracker.api.repository.CarRepository;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class CarServiceImpl implements CarService {
     @Transactional
     public List<Car> updateVehicles(List<Car> carList) {
         for (Car car : carList) {
-            Car existing = repository.findOne(car.getVin());
+            Car existing = repository.findByVin(car.getVin());
             if (existing == null) {
                 createVehicle(car);
             } else {
@@ -33,8 +33,12 @@ public class CarServiceImpl implements CarService {
         return carList;
     }
 
-    @Transactional
-    public Reading createReading(Reading reading) {
-        return repository.createReading(reading);
+    public Car findByVin(String vin) {
+        Car existing = repository.findByVin(vin);
+        if (existing == null) {
+            throw new ResourceNotFoundException("Car with vin " + vin + " doesn't exist.");
+        }
+        return existing;
     }
+
 }

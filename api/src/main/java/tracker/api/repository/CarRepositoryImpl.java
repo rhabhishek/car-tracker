@@ -2,7 +2,6 @@ package tracker.api.repository;
 
 import org.springframework.stereotype.Repository;
 import tracker.api.entity.Car;
-import tracker.api.entity.Reading;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +13,7 @@ public class CarRepositoryImpl implements CarRepository {
     private EntityManager entityManager;
 
 
-    public Car findOne(String vin) {
+    public Car findByVin(String vin) {
         return entityManager.find(Car.class, vin);
     }
 
@@ -27,8 +26,5 @@ public class CarRepositoryImpl implements CarRepository {
         return entityManager.merge(car);
     }
 
-    public Reading createReading(Reading reading) {
-        entityManager.persist(reading);
-        return reading;
-    }
+
 }

@@ -1,12 +1,13 @@
 package tracker.api.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Car.findByVin", query = "SELECT car FROM Car car WHERE car.vin=:paramVin")
+})
 public class Car {
 
     @Id
