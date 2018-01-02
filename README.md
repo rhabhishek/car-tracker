@@ -1,5 +1,5 @@
-# car-tracker-seed
-seed for the Full-Stack IOT training project: car-tracker
+# car-tracker
+Full-Stack IOT project: car-tracker
 
 ## directory structure:
 
